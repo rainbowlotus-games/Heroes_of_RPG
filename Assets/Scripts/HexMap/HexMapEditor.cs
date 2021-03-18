@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace HexMap
 {
@@ -19,7 +20,7 @@ namespace HexMap
 
 		void Update()
 		{
-			if (Input.GetMouseButton(0))
+			if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
 			{
 				HandleInput();
 			}
