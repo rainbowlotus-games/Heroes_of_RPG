@@ -51,6 +51,19 @@ namespace HexMap
             hexMesh.Triangulate(cells);
         }
 
+        public HexCell GetCell(Vector3 position)
+        {
+            position = transform.InverseTransformPoint(position);
+            HexCoordinates coordinates = HexCoordinates.FromPosition(position);
+            int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+            return cells[index];
+        }
+
+        public void Refresh()
+        {
+            hexMesh.Triangulate(cells);
+        }
+
         void CreateCell(int x, int z, int i)
         {
             Vector3 position;
@@ -96,6 +109,8 @@ namespace HexMap
             label.rectTransform.anchoredPosition =
                 new Vector2(position.x, position.z);
             label.text = cell.coordinates.ToStringOnSeparateLines();
+
+            cell.uiRect = label.rectTransform;
         }
     }
 }
